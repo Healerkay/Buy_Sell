@@ -8,6 +8,9 @@ jobs:
     fetch_and_start_the_app:
         runs-on: self-hosted
         steps:
+
+            - name: "Log in as root user"
+              run:  "sudo su"
             - name: "Remove container kingy"
               run: "sudo docker rm -f kingy || true"
               
