@@ -2,7 +2,7 @@ name: Deployment Workflow
 on:
     push:
       branches:
-        - main
+        - master
 
 jobs:
     pusher:
@@ -22,8 +22,8 @@ jobs:
                 
             - name: "Build the image for the App"
               env:
-                  IMAGE_NAME: kingy
-                  VERSION: newest
+                  IMAGE_NAME: ghost
+                  VERSION: latest
                   USERNAME: healerkay
               run: |
                     docker build -t $USERNAME/$IMAGE_NAME:$VERSION .
