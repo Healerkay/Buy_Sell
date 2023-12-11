@@ -1,0 +1,20 @@
+name: "Continous Deployment"
+on: 
+    workflow_run: 
+        workflows: ["Deployment Workflow"]
+        types:
+        - completed
+jobs:
+    build:
+        runs-on: self-hosted
+        steps:
+
+            
+            - name: Get the image from Docker Hub
+              run: Sudo docker pull healerkay/node:latest
+
+            - name: Remove container node
+              run: sudo docker rm -f node || true
+            
+            - name: Run the image as a container
+              run: Sudo docker run -d -p 8080 --name node healerkay/node:latest
