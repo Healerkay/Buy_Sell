@@ -1,0 +1,20 @@
+name: "Continous Deployment"
+on: 
+    workflow_run: 
+        workflows: ["Deployment Workflow"]
+        types:
+        - completed
+jobs:
+    fetch_and_start_the_app:
+        runs-on: self-hosted
+        steps:
+
+            
+            - name: Remove container ghost
+              run: sudo docker rm -f ghost || true
+              
+            - name: Get the image from Docker Hub
+              run: Sudo docker pull healerkay/ghost:latest
+            
+            - name: Run the image as a container
+              run: Sudo docker run -d -p 8080 --name ghost healerkay/ghost:latest
